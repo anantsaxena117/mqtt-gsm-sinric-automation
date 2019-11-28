@@ -25,7 +25,7 @@ ESP8266WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
 WiFiClient client;
 
-SoftwareSerial SIM900(D3, D4);
+SoftwareSerial SIM900(D3, D4); // Tx, Rx
 
 const char *ssid = "XXXXXX"; // cannot be longer than 32 characters!
 const char *pass = "XXXXXX";
@@ -96,11 +96,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
                 turnOff(deviceId);
             }
         }
-        else if (action == "SetTargetTemperature") {
-            String deviceId = json ["deviceId"];     
-            String action = json ["action"];
-            String value = json ["value"];
-        }
+        
         else if (action == "test") {
             Serial.println("[WSc] received test command from sinric.com");
         }
@@ -350,14 +346,14 @@ if(topic2 == "alarm2")
 
 
 void turnOn(String deviceId) {
-  if (deviceId == "5c7986ca43a2e4207d83227e") // Device ID of first device
+  if (deviceId == "_________________________") // Device ID of first device
   {  
     Serial.print("Turn on device id: ");
     Serial.println(deviceId);
     client1.publish(topic, payload1);
     print(1,1,3);
   }
-  else if (deviceId == "5c7ce9e48cadb232df2bce81") // Device ID of second device
+  else if (deviceId == "__________________________") // Device ID of second device
   { 
     Serial.print("Turn on device id: ");
     Serial.println(deviceId);
@@ -370,7 +366,7 @@ void turnOn(String deviceId) {
 
 void turnOff(String deviceId) 
 {
-   if (deviceId == "5c7986ca43a2e4207d83227e") // Device ID of first device
+   if (deviceId == "_______________________________") // Device ID of first device
    {  
      Serial.print("Turn off Device ID: ");
      Serial.println(deviceId);
@@ -378,7 +374,7 @@ void turnOff(String deviceId)
 
      print(1,0,3);
    }
-   else if (deviceId == "5c7ce9e48cadb232df2bce81") // Device ID of second device
+   else if (deviceId == "_________________________________") // Device ID of second device
   { 
     Serial.print("Turn on device id: ");
     Serial.println(deviceId);
